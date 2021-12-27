@@ -49,7 +49,7 @@ std::string applicationRootDirectory; // including trailing slash
 //	Configuration/ (including the file GeneticAlgorithmConfig.json)
 //	Logs/
 //	Save/
-//  Temp/
+//	Temp/
 
 std::string version() { return "Syntheta v1.0"; } // for display in, e.g., the run log
 int currentSaveRestoreVersion() { return 1; } // increment whenever the system is upgraded in a way that impacts the JSON file

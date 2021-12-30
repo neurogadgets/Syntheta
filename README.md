@@ -7,7 +7,7 @@ However daunting the task of amalgamating such a disparate collection of data so
 
 *Syntheta*, a system of artificial general intelligence, was engineered to represent all information in a simple and universal format, to innovate by repurposing duplicated modules of standard design, and to achieve stability and robustness through feedback and regulation.
 
-Please visit this page periodically. Syntheta's documentation will be released in stages, as will its code (written in portable C++17).
+Please visit this page periodically. Syntheta's documentation will be released in stages, as will its code (written in portable C++17). Feel free to use the utilities in SourceCode/Common/ for other projects as well.
 
 I am interested in finding collaborators and contributors.
 

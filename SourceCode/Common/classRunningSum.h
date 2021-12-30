@@ -1,8 +1,8 @@
 // classRunningSum.h
-// Version 2019.10.10
+// Version 2021.12.29
 
 /*
-Copyright (c) 2017-2019, NeuroGadgets Inc.
+Copyright (c) 2017-2021, NeuroGadgets Inc.
 Author: Robert L. Charlebois
 All rights reserved.
 
@@ -43,6 +43,7 @@ template<class T> struct RunningSum {
 	T c_;
 
 	RunningSum(T init = T()) : sum_(init), c_(T()) { }
+	RunningSum(T init, T residual) : sum_(init), c_(residual) { }
 	RunningSum& operator+=(const T& val) { // Kahan summation
 		const T y = val - c_;
 		const T t = sum_ + y;
@@ -59,6 +60,7 @@ template<class T> struct RunningSum {
 		return *this;
 	}
 	T get() const { return sum_; }
+	T getResidual() const { return c_; }
 	void clear() {
 		sum_ = T();
 		c_ = T();

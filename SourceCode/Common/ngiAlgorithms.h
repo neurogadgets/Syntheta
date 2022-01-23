@@ -1,8 +1,8 @@
 // ngiAlgorithms.h
-// Version 2021.12.25
+// Version 2022.01.22
 
 /*
-Copyright (c) 2005-2021, NeuroGadgets Inc.
+Copyright (c) 2005-2022, NeuroGadgets Inc.
 Author: Robert L. Charlebois
 All rights reserved.
 
@@ -31,9 +31,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // ***********************************************************************************************************
 // * Important note: the above copyright and license is for NeuroGadgets Inc.'s original code herein.        *
-// * Code snippets freely obtained from elsewhere, as indicated, are not necessarily subject to these rules. *
-// * They are included in this file for convenience. If there are any objections, the code can be separated  *
-// * out to their own separate files.                                                                        *
+// * Code snippets freely obtained from elsewhere, as indicated below, are not necessarily subject to these  *
+// * rules. They are included in this file for convenience. If there are any objections, the code can be     *
+// * separated out to their own separate files.                                                              *
 // ***********************************************************************************************************
 
 #ifndef NGI_ALGORITHMS_H
@@ -442,11 +442,11 @@ namespace syam_detail {
 	};
 
 	template<> struct string_size_impl<const char> { // Added, to allow individual characters to be included
-		static constexpr std::size_t size(const char c) { return 1; }
+		static constexpr std::size_t size(const char) { return 1; }
 	};
 
 	template<> struct string_size_impl<char> { // Added, to allow individual characters to be included
-		static constexpr std::size_t size(char c) { return 1; }
+		static constexpr std::size_t size(char) { return 1; }
 	};
 
 	template<typename String> std::size_t string_size(String&& s) {

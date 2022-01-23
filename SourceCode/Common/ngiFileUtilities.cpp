@@ -1,8 +1,8 @@
 // ngiFileUtilities.cpp
-// Version 2021.12.25
+// Version 2022.01.23
 
 /*
-Copyright (c) 2013-2021, NeuroGadgets Inc.
+Copyright (c) 2013-2022, NeuroGadgets Inc.
 Author: Robert L. Charlebois
 All rights reserved.
 
@@ -43,6 +43,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 #include <unistd.h>
 #include <sys/file.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 
 Lockfile::Lockfile(const std::string& lockfileName, bool wait) :
@@ -74,11 +75,22 @@ namespace ngi {
 
 std::time_t fileModificationTime(const std::string& filename)
 {
+/*
 	auto ftime = fs::last_write_time(filename);
 	#if __cplusplus >= 201703L
-		return decltype(ftime)::clock::to_time_t(ftime);
+		return decltype(ftime)::clock::to_time_t(ftime); // broken, fixes coming in C++20?
 	#else
 		return ftime; // Boost last_write_time() returns time_t
+	#endif
+*/
+	#if __cplusplus >= 201703L
+		struct stat info;
+		if (stat(filename.c_str(), &info) != 0) { // the file does not exist
+			throw std::runtime_error("fileModificationTime(): cannot locate " + filename);
+		}
+		return info.st_mtime;
+	#else
+		return fs::last_write_time(filename); // Boost last_write_time() returns time_t
 	#endif
 }
 

@@ -1,5 +1,5 @@
 // ngiAlgorithms.h
-// Version 2022.01.22
+// Version 2022.06.04
 
 /*
 Copyright (c) 2005-2022, NeuroGadgets Inc.
@@ -597,6 +597,20 @@ template<class InIt, class T> inline T variance(InIt first, InIt last, T)
 	if (n < 2) return T(0);
 	const T s = sum(first, last, T(0));
 	return (sumOfSquares(first, last, T(0)) - s * s / n) / (n - 1);	
+}
+
+template<class InIt, class T> inline std::pair<T, T> meanAndVariance(InIt first, InIt last, T)
+{ // Saves on running sum() twice
+	std::pair<T, T> result;
+	if (first != last) {
+		const auto n = std::distance(first, last);
+		const T s = sum(first, last, T(0));
+		result.first = s / n;
+		if (n > 1) {
+			result.second = (sumOfSquares(first, last, T(0)) - s * result.first) / (n - 1);
+		}
+	}
+	return result;
 }
 
 template<class InIt, class T> inline T standardDev(InIt first, InIt last, T)
